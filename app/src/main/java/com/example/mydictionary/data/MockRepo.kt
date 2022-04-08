@@ -1,4 +1,4 @@
-package com.example.mydictionary
+package com.example.mydictionary.data
 
 import com.example.mydictionary.domain.entities.Meanings
 import com.example.mydictionary.domain.entities.Translation

@@ -1,4 +1,4 @@
-package com.example.mydictionary.ui
+package com.example.mydictionary.ui.screens.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

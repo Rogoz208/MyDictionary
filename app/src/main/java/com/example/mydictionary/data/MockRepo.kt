@@ -20,11 +20,11 @@ class MockRepo : Repository {
     private fun fillRepoByTestValues() {
         for (i in 0..19) {
             cache.add(
-                i,
-                WordEntity(
-                    i,
-                    "test word $i",
-                    listOf(Meanings(Translation("test translation"), null))
+                index = i,
+                element = WordEntity(
+                    id = i,
+                    text = "test word $i",
+                    meanings = listOf(Meanings(Translation("test translation"), null))
                 )
             )
         }

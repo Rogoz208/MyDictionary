@@ -1,4 +1,4 @@
-package com.example.mydictionary.data
+package com.example.mydictionary.data.retrofit
 
 import okhttp3.Interceptor
 import okhttp3.Response

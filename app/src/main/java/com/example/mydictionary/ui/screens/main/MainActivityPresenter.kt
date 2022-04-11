@@ -29,7 +29,7 @@ class MainActivityPresenter<V : BaseView>(private val repo: Repository) : BasePr
     override fun getData(word: String) {
 
         wordsDisposable = repo.getData(word)
-            .observeOn(Schedulers.computation())
+            .observeOn(Schedulers.io())
             .subscribeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onNext = {

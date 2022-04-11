@@ -7,9 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.mydictionary.R
-import com.example.mydictionary.data.MockRepo
-import com.example.mydictionary.data.retrofit.ApiService
-import com.example.mydictionary.data.retrofit.RepoImpl
+import com.example.mydictionary.app
 import com.example.mydictionary.databinding.ActivityMainBinding
 import com.example.mydictionary.domain.entities.WordEntity
 import com.example.mydictionary.ui.base.BaseActivity
@@ -44,7 +42,7 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
     }
 
     override fun createPresenter(): BasePresenter<BaseView> {
-        return MainActivityPresenter(RepoImpl())
+        return app.mainActivityPresenter
     }
 
     override fun renderData(words: List<WordEntity>) {

@@ -1,6 +1,5 @@
 package com.example.mydictionary.data.retrofit
 
-import com.example.mydictionary.data.BaseInterceptor
 import com.example.mydictionary.domain.entities.WordEntity
 import com.example.mydictionary.domain.repos.Repository
 import io.reactivex.rxjava3.core.Observable

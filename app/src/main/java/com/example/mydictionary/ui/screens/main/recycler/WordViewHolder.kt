@@ -24,6 +24,10 @@ class WordViewHolder(parent: ViewGroup, private val clickListener: OnWordClickLi
         itemView.setOnClickListener {
             clickListener.onWordClick(word, this.layoutPosition)
         }
+        itemView.setOnLongClickListener {
+            clickListener.onWordLongClick(word, itemView, this.layoutPosition)
+            true
+        }
     }
 
 }

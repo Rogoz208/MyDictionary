@@ -2,6 +2,7 @@ package com.example.mydictionary.ui.base
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.mydictionary.domain.entities.WordEntity
 
 abstract class BaseActivity(layout: Int) : AppCompatActivity(layout), BaseView {
 
@@ -9,7 +10,7 @@ abstract class BaseActivity(layout: Int) : AppCompatActivity(layout), BaseView {
 
     protected abstract fun createPresenter(): BasePresenter<BaseView>
 
-    abstract override fun renderData()
+    abstract override fun renderData(words: List<WordEntity>)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

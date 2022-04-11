@@ -28,17 +28,7 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
         super.onCreate(savedInstanceState)
 
         initRecyclerView()
-
-        binding.searchFab.setOnClickListener {
-            val searchDialogFragment = SearchDialogFragment.newInstance()
-            val onSearchClickListener = object : SearchDialogFragment.OnSearchClickListener {
-                override fun onClick(searchWord: String) {
-                    presenter.getData(searchWord)
-                }
-            }
-            searchDialogFragment.setOnSearchClickListener(onSearchClickListener)
-            searchDialogFragment.show(supportFragmentManager, BOTTOM_SHEET_FRAGMENT_DIALOG_TAG)
-        }
+        initSearchFab()
     }
 
     override fun createPresenter(): BasePresenter<BaseView> {
@@ -69,5 +59,18 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.adapter = adapter
+    }
+
+    private fun initSearchFab() {
+        binding.searchFab.setOnClickListener {
+            val searchDialogFragment = SearchDialogFragment.newInstance()
+            val onSearchClickListener = object : SearchDialogFragment.OnSearchClickListener {
+                override fun onClick(searchWord: String) {
+                    presenter.getData(searchWord)
+                }
+            }
+            searchDialogFragment.setOnSearchClickListener(onSearchClickListener)
+            searchDialogFragment.show(supportFragmentManager, BOTTOM_SHEET_FRAGMENT_DIALOG_TAG)
+        }
     }
 }

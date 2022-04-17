@@ -12,11 +12,13 @@ import com.example.mydictionary.R
 import com.example.mydictionary.app
 import com.example.mydictionary.databinding.ActivityMainBinding
 import com.example.mydictionary.domain.entities.WordEntity
+import com.example.mydictionary.domain.repos.Repository
 import com.example.mydictionary.ui.screens.main.recycler.OnWordClickListener
 import com.example.mydictionary.ui.screens.main.recycler.WordsAdapter
 import com.example.mydictionary.ui.screens.main.recycler.WordsDiffCallback
 import com.example.mydictionary.ui.screens.main.viewmodel.MainActivityViewModelContract
 import com.example.mydictionary.ui.screens.main.viewmodel.MainActivityViewModelFactory
+import javax.inject.Inject
 
 private const val BOTTOM_SHEET_FRAGMENT_DIALOG_TAG = "BOTTOM_SHEET_FRAGMENT_DIALOG_TAG"
 
@@ -24,12 +26,17 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private val binding by viewBinding(ActivityMainBinding::bind)
     private val adapter by lazy { WordsAdapter() }
+
+    @Inject
+    lateinit var repo: Repository
     private val viewModel: MainActivityViewModelContract.ViewModel by viewModels {
-        MainActivityViewModelFactory(app.repo)
+        MainActivityViewModelFactory(repo)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        app.di.inject(this)
 
         initRecyclerView()
         initSearchFab()

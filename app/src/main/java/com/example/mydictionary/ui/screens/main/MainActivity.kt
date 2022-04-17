@@ -15,6 +15,8 @@ import com.example.mydictionary.domain.entities.WordEntity
 import com.example.mydictionary.ui.screens.main.recycler.OnWordClickListener
 import com.example.mydictionary.ui.screens.main.recycler.WordsAdapter
 import com.example.mydictionary.ui.screens.main.recycler.WordsDiffCallback
+import com.example.mydictionary.ui.screens.main.viewmodel.MainActivityViewModelContract
+import com.example.mydictionary.ui.screens.main.viewmodel.MainActivityViewModelFactory
 
 private const val BOTTOM_SHEET_FRAGMENT_DIALOG_TAG = "BOTTOM_SHEET_FRAGMENT_DIALOG_TAG"
 

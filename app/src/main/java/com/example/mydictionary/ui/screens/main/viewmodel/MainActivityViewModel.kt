@@ -1,4 +1,4 @@
-package com.example.mydictionary.ui.screens.main
+package com.example.mydictionary.ui.screens.main.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import com.example.mydictionary.domain.entities.WordEntity

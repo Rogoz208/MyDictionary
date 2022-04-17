@@ -1,4 +1,4 @@
-package com.example.mydictionary.ui.screens.main
+package com.example.mydictionary.ui.screens.main.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

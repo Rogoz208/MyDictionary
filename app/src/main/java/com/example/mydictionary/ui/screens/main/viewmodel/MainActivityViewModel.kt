@@ -1,5 +1,6 @@
 package com.example.mydictionary.ui.screens.main.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.mydictionary.domain.entities.WordEntity
 import com.example.mydictionary.domain.repos.Repository
@@ -15,6 +16,7 @@ class MainActivityViewModel(private val repo: Repository) :
 
     override val wordsLiveData: MutableLiveData<List<WordEntity>> =
         MutableLiveData<List<WordEntity>>()
+    override val errorLiveData: MutableLiveData<String> = MutableLiveData<String>()
 
     override fun getData(word: String) {
         wordsDisposable = repo.getData(word)
@@ -25,7 +27,7 @@ class MainActivityViewModel(private val repo: Repository) :
                     wordsLiveData.postValue(data)
                 },
                 onError = {
-
+                    errorLiveData.postValue(it.localizedMessage)
                 }
             )
     }

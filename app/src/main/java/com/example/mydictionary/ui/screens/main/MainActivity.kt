@@ -72,6 +72,10 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         viewModel.wordsLiveData.observe(this) { words: List<WordEntity> ->
             renderData(words)
         }
+
+        viewModel.errorLiveData.observe(this) { errorMessage: String ->
+            Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun renderData(words: List<WordEntity>) {

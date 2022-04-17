@@ -1,6 +1,5 @@
 package com.example.mydictionary.ui.screens.main.viewmodel
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.mydictionary.domain.entities.WordEntity
 import com.example.mydictionary.domain.repos.Repository

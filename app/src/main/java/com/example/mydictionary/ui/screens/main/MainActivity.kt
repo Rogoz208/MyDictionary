@@ -3,6 +3,8 @@ package com.example.mydictionary.ui.screens.main
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -10,36 +12,26 @@ import com.example.mydictionary.R
 import com.example.mydictionary.app
 import com.example.mydictionary.databinding.ActivityMainBinding
 import com.example.mydictionary.domain.entities.WordEntity
-import com.example.mydictionary.ui.base.BaseActivity
-import com.example.mydictionary.ui.base.BasePresenter
-import com.example.mydictionary.ui.base.BaseView
 import com.example.mydictionary.ui.screens.main.recycler.OnWordClickListener
 import com.example.mydictionary.ui.screens.main.recycler.WordsAdapter
 import com.example.mydictionary.ui.screens.main.recycler.WordsDiffCallback
 
 private const val BOTTOM_SHEET_FRAGMENT_DIALOG_TAG = "BOTTOM_SHEET_FRAGMENT_DIALOG_TAG"
 
-class MainActivity : BaseActivity(R.layout.activity_main) {
+class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private val binding by viewBinding(ActivityMainBinding::bind)
     private val adapter by lazy { WordsAdapter() }
+    private val viewModel: MainActivityViewModelContract.ViewModel by viewModels {
+        MainActivityViewModelFactory(app.repo)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         initRecyclerView()
         initSearchFab()
-    }
-
-    override fun createPresenter(): BasePresenter<BaseView> {
-        return app.mainActivityPresenter
-    }
-
-    override fun renderData(words: List<WordEntity>) {
-        val wordsDiffCallback = WordsDiffCallback(adapter.data, words)
-        val result = DiffUtil.calculateDiff(wordsDiffCallback, true)
-        adapter.data = words
-        result.dispatchUpdatesTo(adapter)
+        initViewModel()
     }
 
     private fun initRecyclerView() {
@@ -66,11 +58,24 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
             val searchDialogFragment = SearchDialogFragment.newInstance()
             val onSearchClickListener = object : SearchDialogFragment.OnSearchClickListener {
                 override fun onClick(searchWord: String) {
-                    presenter.getData(searchWord)
+                    viewModel.getData(searchWord)
                 }
             }
             searchDialogFragment.setOnSearchClickListener(onSearchClickListener)
             searchDialogFragment.show(supportFragmentManager, BOTTOM_SHEET_FRAGMENT_DIALOG_TAG)
         }
+    }
+
+    private fun initViewModel() {
+        viewModel.wordsLiveData.observe(this) { words: List<WordEntity> ->
+            renderData(words)
+        }
+    }
+
+    private fun renderData(words: List<WordEntity>) {
+        val wordsDiffCallback = WordsDiffCallback(adapter.data, words)
+        val result = DiffUtil.calculateDiff(wordsDiffCallback, true)
+        adapter.data = words
+        result.dispatchUpdatesTo(adapter)
     }
 }

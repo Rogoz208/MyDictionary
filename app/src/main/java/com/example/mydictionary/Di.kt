@@ -8,7 +8,6 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 private const val BASE_URL_QUALIFIER = "BASE_URL_QUALIFIER"
@@ -29,7 +28,6 @@ object Di {
             Retrofit.Builder()
                 .baseUrl(get<String>(named(BASE_URL_QUALIFIER)))
                 .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .build()
         }
 

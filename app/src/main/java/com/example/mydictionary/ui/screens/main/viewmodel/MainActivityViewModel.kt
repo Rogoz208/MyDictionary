@@ -1,33 +1,27 @@
 package com.example.mydictionary.ui.screens.main.viewmodel
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.mydictionary.domain.entities.WordEntity
 import com.example.mydictionary.domain.repos.Repository
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.disposables.Disposable
-import io.reactivex.rxjava3.kotlin.subscribeBy
-import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.io.IOException
 
 class MainActivityViewModel(private val repo: Repository) :
     MainActivityViewModelContract.ViewModel() {
 
-    private var wordsDisposable: Disposable? = null
-
-    override val wordsLiveData: MutableLiveData<List<WordEntity>> =
-        MutableLiveData<List<WordEntity>>()
+    override val wordsLiveData: MutableLiveData<List<WordEntity>> = MutableLiveData<List<WordEntity>>()
     override val errorLiveData: MutableLiveData<String> = MutableLiveData<String>()
 
     override fun getData(word: String) {
-        wordsDisposable = repo.getData(word)
-            .observeOn(Schedulers.io())
-            .subscribeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(
-                onNext = { data: List<WordEntity> ->
-                    wordsLiveData.postValue(data)
-                },
-                onError = {
-                    errorLiveData.postValue(it.localizedMessage)
-                }
-            )
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val words = repo.getData(word)
+                wordsLiveData.postValue(words)
+            } catch (e: IOException) {
+                errorLiveData.postValue(e.localizedMessage)
+            }
+        }
     }
 }

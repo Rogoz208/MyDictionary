@@ -9,17 +9,20 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Named
 import javax.inject.Singleton
 
+private const val BASE_URL_QUALIFIER = "BASE_URL_QUALIFIER"
+private const val SKYENG_API_BASE_URL = "https://dictionary.skyeng.ru/api/public/v1/"
+
 @Module
 class RetrofitModule {
 
     @Singleton
-    @Named("baseUrl")
+    @Named(BASE_URL_QUALIFIER)
     @Provides
-    fun provideBaseUrl(): String = "https://dictionary.skyeng.ru/api/public/v1/"
+    fun provideBaseUrl(): String = SKYENG_API_BASE_URL
 
     @Singleton
     @Provides
-    fun provideRetrofit(@Named("baseUrl") baseUrl: String): Retrofit {
+    fun provideRetrofit(@Named(BASE_URL_QUALIFIER) baseUrl: String): Retrofit {
         return Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())

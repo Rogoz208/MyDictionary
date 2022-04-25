@@ -1,9 +1,15 @@
+@file:Suppress("RemoveExplicitTypeArguments")
+
 package com.example.mydictionary
 
+import androidx.room.Room
+import com.example.mydictionary.data.db.WordsDatabase
+import com.example.mydictionary.data.db.dao.WordsDao
 import com.example.mydictionary.data.repos.RepoImpl
 import com.example.mydictionary.data.retrofit.SkyengApi
 import com.example.mydictionary.domain.repos.Repository
 import com.example.mydictionary.ui.screens.main.viewmodel.MainActivityViewModel
+import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
@@ -34,8 +40,18 @@ object Di {
         single<SkyengApi> { get<Retrofit>().create(SkyengApi::class.java) }
     }
 
+    val databaseModule = module {
+
+        single<WordsDatabase> {
+            Room.databaseBuilder(androidApplication(), WordsDatabase::class.java, "words_database")
+                .build()
+        }
+
+        single<WordsDao> { get<WordsDatabase>().wordsDao() }
+    }
+
     val viewModelsModule = module {
 
-        viewModel { MainActivityViewModel(repo = get()) }
+        viewModel { MainActivityViewModel(repo = get(), wordsDao = get()) }
     }
 }

@@ -1,6 +1,9 @@
 package com.example.mydictionary.ui.screens.main
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +13,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.mydictionary.R
 import com.example.mydictionary.databinding.ActivityMainBinding
 import com.example.mydictionary.domain.entities.WordEntity
+import com.example.mydictionary.ui.screens.history.HistoryActivity
 import com.example.mydictionary.ui.screens.main.recycler.OnWordClickListener
 import com.example.mydictionary.ui.screens.main.recycler.WordsAdapter
 import com.example.mydictionary.ui.screens.main.recycler.WordsDiffCallback
@@ -31,6 +35,21 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         initRecyclerView()
         initSearchFab()
         initViewModel()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.activity_main_toolbar_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.history_menu_item -> {
+                val intent = Intent(this, HistoryActivity::class.java)
+                startActivity(intent)
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun initRecyclerView() {
@@ -75,10 +94,10 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         }
     }
 
-    private fun renderData(words: List<WordEntity>) {
-        val wordsDiffCallback = WordsDiffCallback(adapter.data, words)
+    private fun renderData(data: List<WordEntity>) {
+        val wordsDiffCallback = WordsDiffCallback(adapter.data, data)
         val result = DiffUtil.calculateDiff(wordsDiffCallback, true)
-        adapter.data = words
+        adapter.data = data
         result.dispatchUpdatesTo(adapter)
     }
 }

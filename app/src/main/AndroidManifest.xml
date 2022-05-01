@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyDictionary">
         <activity
+            android:name=".ui.screens.description.DescriptionActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.screens.history.HistoryActivity"
             android:exported="false" />
         <activity

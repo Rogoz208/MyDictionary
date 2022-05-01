@@ -11,8 +11,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.mydictionary.R
+import com.example.mydictionary.convertMeaningsToString
 import com.example.mydictionary.databinding.ActivityMainBinding
 import com.example.mydictionary.domain.entities.WordEntity
+import com.example.mydictionary.ui.screens.description.DescriptionActivity
 import com.example.mydictionary.ui.screens.history.HistoryActivity
 import com.example.mydictionary.ui.screens.main.recycler.OnWordClickListener
 import com.example.mydictionary.ui.screens.main.recycler.WordsAdapter
@@ -55,8 +57,14 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private fun initRecyclerView() {
         val onItemClickListener = object : OnWordClickListener {
             override fun onWordClick(item: WordEntity, position: Int) {
-                Toast.makeText(this@MainActivity, "${item.text} is clicked", Toast.LENGTH_LONG)
-                    .show()
+                startActivity(
+                    DescriptionActivity.getIntent(
+                        this@MainActivity,
+                        item.text!!,
+                        convertMeaningsToString(item.meanings!!),
+                        item.meanings[0].imageUrl
+                    )
+                )
             }
 
             override fun onWordLongClick(item: WordEntity, itemView: View, position: Int) {
@@ -100,4 +108,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         adapter.data = data
         result.dispatchUpdatesTo(adapter)
     }
+
+
 }

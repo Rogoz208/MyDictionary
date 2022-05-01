@@ -17,7 +17,7 @@ fun convertMeaningsToString(meanings: List<Meanings>): String {
     return meaningsSeparatedByComa
 }
 
-fun mapHistoryEntityToWordEntity(list: List<HistoryEntity>): List<WordEntity> {
+fun mapHistoryEntityToWordEntityList(list: List<HistoryEntity>): List<WordEntity> {
     val wordsList = ArrayList<WordEntity>()
     if (!list.isNullOrEmpty()) {
         for (entity in list) {
@@ -27,6 +27,13 @@ fun mapHistoryEntityToWordEntity(list: List<HistoryEntity>): List<WordEntity> {
         }
     }
     return wordsList
+}
+
+fun mapHistoryEntityToWordEntity(entity: HistoryEntity?): WordEntity? = if (entity != null) {
+    val meanings = listOf(Meanings(Translation(entity.translation), null))
+    WordEntity(entity.hashCode(), entity.word, meanings)
+} else {
+    null
 }
 
 fun mapWordEntityToHistoryEntity(word: WordEntity): HistoryEntity =

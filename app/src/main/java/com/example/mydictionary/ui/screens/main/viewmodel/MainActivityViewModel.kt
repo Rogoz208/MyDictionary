@@ -18,6 +18,7 @@ class MainActivityViewModel(private val repo: Repository, private val repoLocal:
 
     override val wordsLiveData: MutableLiveData<List<WordEntity>> =
         MutableLiveData<List<WordEntity>>()
+    override val historyWordLiveData: MutableLiveData<WordEntity> = MutableLiveData<WordEntity>()
     override val errorLiveData: MutableLiveData<String> = MutableLiveData<String>()
 
     override fun getData(word: String) {
@@ -25,6 +26,17 @@ class MainActivityViewModel(private val repo: Repository, private val repoLocal:
             val words = repo.getData(word)
             repoLocal.saveToDb(words[0])
             wordsLiveData.postValue(words)
+        }
+    }
+
+    override fun searchInHistory(word: String) {
+        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+            val historyWord = repoLocal.searchByWord(word)
+            if (historyWord != null) {
+                historyWordLiveData.postValue(historyWord)
+            } else {
+                errorLiveData.postValue("Word is not found in history")
+            }
         }
     }
 }

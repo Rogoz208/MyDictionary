@@ -8,8 +8,10 @@ interface MainActivityViewModelContract {
     abstract class ViewModel : androidx.lifecycle.ViewModel() {
 
         abstract val wordsLiveData: LiveData<List<WordEntity>>
+        abstract val historyWordLiveData: LiveData<WordEntity>
         abstract val errorLiveData: LiveData<String>
 
         abstract fun getData(word: String)
+        abstract fun searchInHistory(word: String)
     }
 }

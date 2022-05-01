@@ -4,6 +4,7 @@ import com.example.mydictionary.data.db.dao.HistoryDao
 import com.example.mydictionary.domain.entities.WordEntity
 import com.example.mydictionary.domain.repos.RepositoryLocal
 import com.example.mydictionary.mapHistoryEntityToWordEntity
+import com.example.mydictionary.mapHistoryEntityToWordEntityList
 import com.example.mydictionary.mapWordEntityToHistoryEntity
 
 class RoomRepoImpl(private val historyDao: HistoryDao) : RepositoryLocal {
@@ -12,7 +13,11 @@ class RoomRepoImpl(private val historyDao: HistoryDao) : RepositoryLocal {
         historyDao.insertWord(mapWordEntityToHistoryEntity(word))
     }
 
+    override suspend fun searchByWord(word: String): WordEntity? {
+        return mapHistoryEntityToWordEntity(historyDao.getDataByWord(word))
+    }
+
     override suspend fun getData(word: String): List<WordEntity> {
-        return mapHistoryEntityToWordEntity(historyDao.getAll())
+        return mapHistoryEntityToWordEntityList(historyDao.getAll())
     }
 }

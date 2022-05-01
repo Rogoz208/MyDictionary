@@ -46,10 +46,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.history_menu_item -> {
-                val intent = Intent(this, HistoryActivity::class.java)
-                startActivity(intent)
-            }
+            R.id.history_menu_item -> startHistoryActivity()
+            R.id.search_history_menu_item -> searchInHistory()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -57,14 +55,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private fun initRecyclerView() {
         val onItemClickListener = object : OnWordClickListener {
             override fun onWordClick(item: WordEntity, position: Int) {
-                startActivity(
-                    DescriptionActivity.getIntent(
-                        this@MainActivity,
-                        item.text!!,
-                        convertMeaningsToString(item.meanings!!),
-                        item.meanings[0].imageUrl
-                    )
-                )
+                openDescriptionActivity(item)
             }
 
             override fun onWordLongClick(item: WordEntity, itemView: View, position: Int) {
@@ -81,14 +72,13 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private fun initSearchFab() {
         binding.searchFab.setOnClickListener {
-            val searchDialogFragment = SearchDialogFragment.newInstance()
             val onSearchClickListener = object : SearchDialogFragment.OnSearchClickListener {
                 override fun onClick(searchWord: String) {
                     viewModel.getData(searchWord)
                 }
             }
-            searchDialogFragment.setOnSearchClickListener(onSearchClickListener)
-            searchDialogFragment.show(supportFragmentManager, BOTTOM_SHEET_FRAGMENT_DIALOG_TAG)
+
+            showSearchDialogFragment(onSearchClickListener)
         }
     }
 
@@ -97,8 +87,12 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             renderData(words)
         }
 
+        viewModel.historyWordLiveData.observe(this) { word: WordEntity ->
+            openDescriptionActivity(word)
+        }
+
         viewModel.errorLiveData.observe(this) { errorMessage: String ->
-            Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
         }
     }
 
@@ -109,5 +103,35 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         result.dispatchUpdatesTo(adapter)
     }
 
+    private fun startHistoryActivity() {
+        val intent = Intent(this, HistoryActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun searchInHistory() {
+        val onSearchClickListener = object : SearchDialogFragment.OnSearchClickListener {
+            override fun onClick(searchWord: String) {
+                viewModel.searchInHistory(searchWord)
+            }
+        }
+        showSearchDialogFragment(onSearchClickListener)
+    }
+
+    private fun showSearchDialogFragment(onSearchClickListener: SearchDialogFragment.OnSearchClickListener) {
+        val searchDialogFragment = SearchDialogFragment.newInstance()
+        searchDialogFragment.setOnSearchClickListener(onSearchClickListener)
+        searchDialogFragment.show(supportFragmentManager, BOTTOM_SHEET_FRAGMENT_DIALOG_TAG)
+    }
+
+    private fun openDescriptionActivity(item: WordEntity) {
+        startActivity(
+            DescriptionActivity.getIntent(
+                this@MainActivity,
+                item.text!!,
+                convertMeaningsToString(item.meanings!!),
+                item.meanings[0].imageUrl
+            )
+        )
+    }
 
 }

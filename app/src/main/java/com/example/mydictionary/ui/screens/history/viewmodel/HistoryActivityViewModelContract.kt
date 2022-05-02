@@ -1,17 +1,16 @@
-package com.example.mydictionary.ui.screens.main.viewmodel
+package com.example.mydictionary.ui.screens.history.viewmodel
 
 import androidx.lifecycle.LiveData
+import com.example.mydictionary.data.db.entities.HistoryEntity
 import com.example.mydictionary.domain.entities.WordEntity
 
-interface MainActivityViewModelContract {
+interface HistoryActivityViewModelContract {
 
     abstract class ViewModel : androidx.lifecycle.ViewModel() {
 
         abstract val wordsLiveData: LiveData<List<WordEntity>>
-        abstract val historyWordLiveData: LiveData<WordEntity>
         abstract val errorLiveData: LiveData<String>
 
         abstract fun getData(word: String)
-        abstract fun searchInHistory(word: String)
     }
 }

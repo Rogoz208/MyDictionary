@@ -3,4 +3,7 @@
 
     <string name="search_button">Search</string>
     <string name="search_hint">New word</string>
+    <string name="history_menu_item">History</string>
+    <string name="history_activity">History</string>
+    <string name="search_in_history">Search in history</string>
 </resources>

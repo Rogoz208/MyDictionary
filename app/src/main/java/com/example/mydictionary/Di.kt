@@ -3,15 +3,15 @@
 package com.example.mydictionary
 
 import androidx.room.Room
+import com.example.model.repos.Repository
+import com.example.model.repos.RepositoryLocal
 import com.example.mydictionary.data.db.HistoryDatabase
 import com.example.mydictionary.data.db.dao.HistoryDao
 import com.example.mydictionary.data.repos.RepoImpl
 import com.example.mydictionary.data.repos.RoomRepoImpl
-import com.example.mydictionary.data.retrofit.SkyengApi
-import com.example.mydictionary.domain.repos.Repository
-import com.example.mydictionary.domain.repos.RepositoryLocal
 import com.example.mydictionary.ui.screens.history.viewmodel.HistoryActivityViewModel
 import com.example.mydictionary.ui.screens.main.viewmodel.MainActivityViewModel
+import com.example.retrofit.retrofit.SkyengApi
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named

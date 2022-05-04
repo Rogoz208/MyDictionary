@@ -1,7 +1,7 @@
 package com.example.mydictionary.ui.screens.main.recycler
 
 import android.view.View
-import com.example.mydictionary.domain.entities.WordEntity
+import com.example.model.entities.WordEntity
 
 interface OnWordClickListener {
 

@@ -1,9 +1,8 @@
 package com.example.mydictionary
 
+import com.example.model.entities.Meanings
+import com.example.model.entities.WordEntity
 import com.example.mydictionary.data.db.entities.HistoryEntity
-import com.example.mydictionary.domain.entities.Meanings
-import com.example.mydictionary.domain.entities.Translation
-import com.example.mydictionary.domain.entities.WordEntity
 
 fun convertMeaningsToString(meanings: List<Meanings>): String {
     var meaningsSeparatedByComa = String()
@@ -21,8 +20,15 @@ fun mapHistoryEntityToWordEntityList(list: List<HistoryEntity>): List<WordEntity
     val wordsList = ArrayList<WordEntity>()
     if (!list.isNullOrEmpty()) {
         for (entity in list) {
-            val meanings = listOf(Meanings(Translation(entity.translation), null))
-            val wordEntity = WordEntity(entity.hashCode(), entity.word, meanings)
+            val meanings = listOf(
+                Meanings(
+                    com.example.model.entities.Translation(
+                        entity.translation
+                    ), null
+                )
+            )
+            val wordEntity =
+                WordEntity(entity.hashCode(), entity.word, meanings)
             wordsList.add(wordEntity)
         }
     }
@@ -30,7 +36,13 @@ fun mapHistoryEntityToWordEntityList(list: List<HistoryEntity>): List<WordEntity
 }
 
 fun mapHistoryEntityToWordEntity(entity: HistoryEntity?): WordEntity? = if (entity != null) {
-    val meanings = listOf(Meanings(Translation(entity.translation), null))
+    val meanings = listOf(
+        Meanings(
+            com.example.model.entities.Translation(
+                entity.translation
+            ), null
+        )
+    )
     WordEntity(entity.hashCode(), entity.word, meanings)
 } else {
     null

@@ -2,7 +2,7 @@ package com.example.mydictionary.ui.screens.history.recycler
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mydictionary.domain.entities.WordEntity
+import com.example.model.entities.WordEntity
 
 class WordsAdapter : RecyclerView.Adapter<WordViewHolder>() {
 

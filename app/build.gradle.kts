@@ -46,6 +46,10 @@ android {
 }
 
 dependencies {
+    // Modules
+    implementation(project(Modules.RETROFIT))
+    implementation(project(Modules.MODEL))
+
     // View binding
     implementation(ViewBinding.VIEW_BINDING)
 

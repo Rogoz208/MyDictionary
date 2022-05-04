@@ -1,8 +1,8 @@
 package com.example.mydictionary.data.repos
 
+import com.example.model.entities.WordEntity
+import com.example.model.repos.RepositoryLocal
 import com.example.mydictionary.data.db.dao.HistoryDao
-import com.example.mydictionary.domain.entities.WordEntity
-import com.example.mydictionary.domain.repos.RepositoryLocal
 import com.example.mydictionary.mapHistoryEntityToWordEntity
 import com.example.mydictionary.mapHistoryEntityToWordEntityList
 import com.example.mydictionary.mapWordEntityToHistoryEntity

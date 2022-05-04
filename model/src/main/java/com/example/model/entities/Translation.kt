@@ -1,4 +1,4 @@
-package com.example.mydictionary.domain.entities
+package com.example.model.entities
 
 import com.google.gson.annotations.SerializedName
 

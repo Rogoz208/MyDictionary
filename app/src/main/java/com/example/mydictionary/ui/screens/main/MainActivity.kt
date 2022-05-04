@@ -13,7 +13,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.mydictionary.R
 import com.example.mydictionary.convertMeaningsToString
 import com.example.mydictionary.databinding.ActivityMainBinding
-import com.example.mydictionary.domain.entities.WordEntity
+import com.example.model.entities.WordEntity
 import com.example.mydictionary.ui.screens.description.DescriptionActivity
 import com.example.mydictionary.ui.screens.history.HistoryActivity
 import com.example.mydictionary.ui.screens.main.recycler.OnWordClickListener
@@ -129,7 +129,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                 this@MainActivity,
                 item.text!!,
                 convertMeaningsToString(item.meanings!!),
-                item.meanings[0].imageUrl
+                item.meanings!![0].imageUrl
             )
         )
     }

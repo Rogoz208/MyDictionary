@@ -8,6 +8,7 @@ object Versions {
     const val COROUTINES = "1.6.1"
     const val LYFECYCLE = "2.4.1"
     const val KOTLIN = "1.7.0"
+    const val GOOGLE_GSON = "2.8.9"
 
     // Design
     const val APPCOMPAT = "1.4.1"
@@ -20,6 +21,11 @@ object Versions {
     const val JUNIT = "4.13.2"
     const val ANDROID_JUNIT = "1.1.3"
     const val ESPRESSO = "3.4.0"
+}
+
+object Modules {
+    const val MODEL = ":model"
+    const val RETROFIT = ":retrofit"
 }
 
 object ViewBinding {
@@ -50,6 +56,7 @@ object Room {
     const val ROOM_RUNTIME = "androidx.room:room-runtime:${Versions.ROOM}"
     const val ROOM_COMPILER = "androidx.room:room-compiler:${Versions.ROOM}"
     const val ROOM_KTX = "androidx.room:room-ktx:${Versions.ROOM}"
+    const val GOOGLE_GSON = "com.google.code.gson:gson:${Versions.GOOGLE_GSON}"
 }
 
 object Kotlin {

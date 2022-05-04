@@ -47,43 +47,42 @@ android {
 
 dependencies {
     // View binding
-    implementation("com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.5.6")
+    implementation(ViewBinding.VIEW_BINDING)
 
     // Retrofit
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.retrofit2:adapter-rxjava3:2.9.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:3.12.1")
+    implementation(Retrofit.RETROFIT)
+    implementation(Retrofit.CONVERTER_GSON)
+    implementation(Retrofit.ADAPTER_RX_JAVA)
+    implementation(OkHttp3.LOGGING_INTERCEPTOR)
 
     // Koin
-    implementation("io.insert-koin:koin-core:3.2.0-beta-1")
-    implementation("io.insert-koin:koin-android:3.2.0-beta-1")
+    implementation(Koin.KOIN_CORE)
+    implementation(Koin.KOIN_ANDROID)
 
     // Picasso
-    implementation("com.squareup.picasso:picasso:2.8")
+    implementation(Picasso.PICASSO)
 
     // Room
-    val roomVersion = "2.4.2"
-    implementation("androidx.room:room-runtime:$roomVersion")
-    kapt("androidx.room:room-compiler:$roomVersion")
-    implementation("androidx.room:room-ktx:$roomVersion")
+    implementation(Room.ROOM_RUNTIME)
+    kapt(Room.ROOM_COMPILER)
+    implementation(Room.ROOM_KTX)
 
     // Coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.1")
+    implementation(Coroutines.COROUTINES_CORE)
+    implementation(Coroutines.COROUTINES_ANDROID)
+    implementation(Lifecycle.LIFECYCLE_VIEWMODEL_KTX)
+    implementation(Lifecycle.LIFECYCLE_RUNTIME_KTX)
 
     // Android
-    implementation("androidx.fragment:fragment-ktx:1.4.1")
-    implementation("androidx.core:core-ktx:1.7.0")
-    implementation("androidx.appcompat:appcompat:1.4.1")
-    implementation("com.google.android.material:material:1.5.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.3")
-    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+    implementation(Kotlin.KOTLIN_CORE)
+    implementation(Design.APPCOMPAT)
+    implementation(Design.MATERIAL)
+    implementation(Design.FRAGMENT_KTX)
+    implementation(Design.CONSTRAINT_LAYOUT)
+    implementation(Design.SWIPE_REFRESH_LAYOUT)
 
     // Test
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+    testImplementation(TestImpl.JUNIT)
+    androidTestImplementation(TestImpl.ANDROID_JUNIT)
+    androidTestImplementation(TestImpl.ESPRESSO_CORE)
 }

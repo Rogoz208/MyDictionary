@@ -18,6 +18,8 @@
         <TextView
             android:id="@+id/description_header_text_view"
             android:layout_width="wrap_content"
+            android:textSize="@dimen/large_text_size"
+            android:textStyle="bold"
             android:layout_height="wrap_content"
             tools:text="Header" />
 
@@ -25,8 +27,10 @@
             android:id="@+id/description_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="@dimen/medium_text_size"
             android:layout_marginStart="@dimen/default_margin"
-            tools:text="Description: it is description of the word above" />
+            android:textStyle="italic"
+            tools:text="Description: it is description of the word above it is description of the word above it is description of the word above it is description of the word above it is description of the word above" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="match_parent"

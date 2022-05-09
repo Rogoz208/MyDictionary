@@ -5,9 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.mydictionary.R
-import com.example.mydictionary.data.db.entities.HistoryEntity
 import com.example.mydictionary.databinding.ActivityMainRecyclerviewItemBinding
-import com.example.mydictionary.domain.entities.WordEntity
+import com.example.model.entities.WordEntity
 
 class WordViewHolder(parent: ViewGroup, private val clickListener: OnWordClickListener) :
     RecyclerView.ViewHolder(

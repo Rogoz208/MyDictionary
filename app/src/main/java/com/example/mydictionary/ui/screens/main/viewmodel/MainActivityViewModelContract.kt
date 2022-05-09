@@ -1,7 +1,7 @@
 package com.example.mydictionary.ui.screens.main.viewmodel
 
 import androidx.lifecycle.LiveData
-import com.example.mydictionary.domain.entities.WordEntity
+import com.example.model.entities.WordEntity
 
 interface MainActivityViewModelContract {
 

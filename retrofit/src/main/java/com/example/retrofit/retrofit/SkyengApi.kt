@@ -1,6 +1,6 @@
-package com.example.mydictionary.data.retrofit
+package com.example.retrofit.retrofit
 
-import com.example.mydictionary.domain.entities.WordEntity
+import com.example.model.entities.WordEntity
 import retrofit2.http.GET
 import retrofit2.http.Query
 

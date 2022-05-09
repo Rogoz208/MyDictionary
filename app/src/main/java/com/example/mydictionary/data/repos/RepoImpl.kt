@@ -1,8 +1,8 @@
 package com.example.mydictionary.data.repos
 
-import com.example.mydictionary.data.retrofit.SkyengApi
-import com.example.mydictionary.domain.entities.WordEntity
-import com.example.mydictionary.domain.repos.Repository
+import com.example.model.entities.WordEntity
+import com.example.model.repos.Repository
+import com.example.retrofit.retrofit.SkyengApi
 
 class RepoImpl(private val api: SkyengApi) : Repository {
 

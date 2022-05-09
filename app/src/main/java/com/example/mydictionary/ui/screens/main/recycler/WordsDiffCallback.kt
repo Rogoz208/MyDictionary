@@ -1,7 +1,7 @@
 package com.example.mydictionary.ui.screens.main.recycler
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.mydictionary.domain.entities.WordEntity
+import com.example.model.entities.WordEntity
 
 class WordsDiffCallback(
     private val oldList: List<WordEntity>,

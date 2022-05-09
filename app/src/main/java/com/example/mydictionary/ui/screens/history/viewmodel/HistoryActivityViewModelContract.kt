@@ -1,8 +1,7 @@
 package com.example.mydictionary.ui.screens.history.viewmodel
 
 import androidx.lifecycle.LiveData
-import com.example.mydictionary.data.db.entities.HistoryEntity
-import com.example.mydictionary.domain.entities.WordEntity
+import com.example.model.entities.WordEntity
 
 interface HistoryActivityViewModelContract {
 

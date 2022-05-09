@@ -2,8 +2,8 @@ package com.example.mydictionary.ui.screens.history.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.mydictionary.domain.entities.WordEntity
-import com.example.mydictionary.domain.repos.RepositoryLocal
+import com.example.model.entities.WordEntity
+import com.example.model.repos.RepositoryLocal
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

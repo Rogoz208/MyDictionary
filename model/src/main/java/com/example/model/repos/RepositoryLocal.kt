@@ -1,6 +1,6 @@
-package com.example.mydictionary.domain.repos
+package com.example.model.repos
 
-import com.example.mydictionary.domain.entities.WordEntity
+import com.example.model.entities.WordEntity
 
 interface RepositoryLocal : Repository {
 

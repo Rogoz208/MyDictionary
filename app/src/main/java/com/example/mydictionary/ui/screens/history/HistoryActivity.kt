@@ -18,8 +18,13 @@ import com.example.mydictionary.ui.screens.history.recycler.WordsAdapter
 import com.example.mydictionary.ui.screens.history.viewmodel.HistoryActivityViewModel
 import com.example.mydictionary.ui.screens.history.viewmodel.HistoryActivityViewModelContract
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.component.KoinScopeComponent
+import org.koin.core.component.getOrCreateScope
+import org.koin.core.scope.Scope
 
-class HistoryActivity : AppCompatActivity(R.layout.activity_history) {
+class HistoryActivity : AppCompatActivity(R.layout.activity_history), KoinScopeComponent {
+
+    override val scope: Scope by getOrCreateScope()
 
     private val binding by viewBinding(ActivityHistoryBinding::bind)
     private val adapter by lazy { WordsAdapter() }

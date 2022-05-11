@@ -10,10 +10,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.example.model.entities.WordEntity
 import com.example.mydictionary.R
 import com.example.mydictionary.convertMeaningsToString
 import com.example.mydictionary.databinding.ActivityMainBinding
-import com.example.model.entities.WordEntity
 import com.example.mydictionary.ui.screens.description.DescriptionActivity
 import com.example.mydictionary.ui.screens.history.HistoryActivity
 import com.example.mydictionary.ui.screens.main.recycler.OnWordClickListener
@@ -22,10 +22,15 @@ import com.example.mydictionary.ui.screens.main.recycler.WordsDiffCallback
 import com.example.mydictionary.ui.screens.main.viewmodel.MainActivityViewModel
 import com.example.mydictionary.ui.screens.main.viewmodel.MainActivityViewModelContract
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.component.KoinScopeComponent
+import org.koin.core.component.getOrCreateScope
+import org.koin.core.scope.Scope
 
 private const val BOTTOM_SHEET_FRAGMENT_DIALOG_TAG = "BOTTOM_SHEET_FRAGMENT_DIALOG_TAG"
 
-class MainActivity : AppCompatActivity(R.layout.activity_main) {
+class MainActivity : AppCompatActivity(R.layout.activity_main), KoinScopeComponent {
+
+    override val scope: Scope by getOrCreateScope()
 
     private val binding by viewBinding(ActivityMainBinding::bind)
     private val adapter by lazy { WordsAdapter() }
@@ -133,5 +138,4 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             )
         )
     }
-
 }

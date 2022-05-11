@@ -9,7 +9,9 @@ import com.example.mydictionary.data.db.HistoryDatabase
 import com.example.mydictionary.data.db.dao.HistoryDao
 import com.example.mydictionary.data.repos.RepoImpl
 import com.example.mydictionary.data.repos.RoomRepoImpl
+import com.example.mydictionary.ui.screens.history.HistoryActivity
 import com.example.mydictionary.ui.screens.history.viewmodel.HistoryActivityViewModel
+import com.example.mydictionary.ui.screens.main.MainActivity
 import com.example.mydictionary.ui.screens.main.viewmodel.MainActivityViewModel
 import com.example.retrofit.retrofit.SkyengApi
 import org.koin.android.ext.koin.androidApplication
@@ -59,7 +61,12 @@ object Di {
 
     val viewModelsModule = module {
 
-        viewModel { MainActivityViewModel(repo = get(), repoLocal = get()) }
-        viewModel { HistoryActivityViewModel(repoLocal = get()) }
+        scope<MainActivity> {
+            viewModel { MainActivityViewModel(repo = get(), repoLocal = get()) }
+        }
+
+        scope<HistoryActivity> {
+            viewModel { HistoryActivityViewModel(repoLocal = get()) }
+        }
     }
 }

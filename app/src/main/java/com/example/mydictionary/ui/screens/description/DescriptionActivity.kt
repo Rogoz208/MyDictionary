@@ -5,9 +5,12 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.TextView
+import androidx.transition.Visibility
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.mydictionary.R
 import com.example.mydictionary.databinding.ActivityDescriptionBinding
+import com.example.mydictionary.viewById
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import java.lang.Exception
@@ -22,6 +25,7 @@ class DescriptionActivity : AppCompatActivity(R.layout.activity_description) {
         initActionBar()
         setupListeners()
         setData()
+        testViewByIdDelegate()
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -79,6 +83,11 @@ class DescriptionActivity : AppCompatActivity(R.layout.activity_description) {
         Picasso.get().load("https:$imageUrl")
             .placeholder(R.drawable.ic_no_photo).fit().centerCrop()
             .into(imageView, callback)
+    }
+
+    private fun testViewByIdDelegate() {
+        val testTextView: TextView by viewById(R.id.test_viewbyid_text_view)
+        testTextView.text = "IT WORK!!!"
     }
 
     companion object {

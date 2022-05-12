@@ -16,6 +16,7 @@ object Versions {
     const val FRAGMENT_KTX = "1.4.1"
     const val CONSTRAINT_LAYOUT = "2.1.3"
     const val SWIPE_REFRESH_LAYOUT = "1.1.0"
+    const val SPLASH_SCREEN = "1.0.0-beta02"
 
     //Test
     const val JUNIT = "4.13.2"
@@ -86,6 +87,7 @@ object Design {
         "androidx.constraintlayout:constraintlayout:${Versions.CONSTRAINT_LAYOUT}"
     const val SWIPE_REFRESH_LAYOUT =
         "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.SWIPE_REFRESH_LAYOUT}"
+    const val SPLASH_SCREEN = "androidx.core:core-splashscreen:${Versions.SPLASH_SCREEN}"
 }
 
 object TestImpl {

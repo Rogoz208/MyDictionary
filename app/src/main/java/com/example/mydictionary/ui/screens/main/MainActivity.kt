@@ -1,12 +1,18 @@
 package com.example.mydictionary.ui.screens.main
 
+import android.animation.ObjectAnimator
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.animation.AnticipateInterpolator
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.animation.doOnEnd
+import androidx.core.splashscreen.SplashScreen
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -25,6 +31,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinScopeComponent
 import org.koin.core.component.getOrCreateScope
 import org.koin.core.scope.Scope
+import java.util.concurrent.Executors
 
 private const val BOTTOM_SHEET_FRAGMENT_DIALOG_TAG = "BOTTOM_SHEET_FRAGMENT_DIALOG_TAG"
 
@@ -35,8 +42,13 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), KoinScopeCompone
     private val binding by viewBinding(ActivityMainBinding::bind)
     private val adapter by lazy { WordsAdapter() }
     private val viewModel: MainActivityViewModelContract.ViewModel by viewModel<MainActivityViewModel>()
+    private lateinit var splashScreen: SplashScreen
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            splashScreen = installSplashScreen()
+            setupSplashScreen()
+        }
         super.onCreate(savedInstanceState)
 
         initRecyclerView()
@@ -55,6 +67,33 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), KoinScopeCompone
             R.id.search_history_menu_item -> searchInHistory()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun setupSplashScreen() {
+        showSplashScreen(true)
+        setupSlideLeftExitAnimation()
+    }
+
+    private fun showSplashScreen(shouldShow: Boolean) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            splashScreen.setKeepOnScreenCondition { shouldShow }
+        }
+    }
+
+    private fun setupSlideLeftExitAnimation() {
+        splashScreen.setOnExitAnimationListener { splashScreenViewProvider ->
+            ObjectAnimator.ofFloat(
+                splashScreenViewProvider.view,
+                View.TRANSLATION_X,
+                0f,
+                -splashScreenViewProvider.view.width.toFloat()
+            ).apply {
+                interpolator = AnticipateInterpolator()
+                duration = 600
+                doOnEnd { splashScreenViewProvider.remove() }
+                start()
+            }
+        }
     }
 
     private fun initRecyclerView() {
@@ -99,6 +138,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), KoinScopeCompone
         viewModel.errorLiveData.observe(this) { errorMessage: String ->
             Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
         }
+        showSplashScreen(false)
     }
 
     private fun renderData(data: List<WordEntity>) {

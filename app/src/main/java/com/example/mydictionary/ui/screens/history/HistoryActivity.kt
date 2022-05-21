@@ -1,9 +1,11 @@
 package com.example.mydictionary.ui.screens.history
 
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -31,6 +33,9 @@ class HistoryActivity : AppCompatActivity(R.layout.activity_history), KoinScopeC
     private val viewModel: HistoryActivityViewModelContract.ViewModel by viewModel<HistoryActivityViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
+            installSplashScreen()
+        }
         super.onCreate(savedInstanceState)
 
         initActionBar()

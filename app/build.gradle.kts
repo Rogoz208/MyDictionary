@@ -85,6 +85,7 @@ dependencies {
     implementation(Design.FRAGMENT_KTX)
     implementation(Design.CONSTRAINT_LAYOUT)
     implementation(Design.SWIPE_REFRESH_LAYOUT)
+    implementation(Design.SPLASH_SCREEN)
 
     // Test
     testImplementation(TestImpl.JUNIT)

@@ -2,10 +2,12 @@ package com.example.mydictionary.ui.screens.description
 
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.transition.Visibility
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.mydictionary.R
@@ -20,6 +22,9 @@ class DescriptionActivity : AppCompatActivity(R.layout.activity_description) {
     private val binding by viewBinding(ActivityDescriptionBinding::bind)
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
+            installSplashScreen()
+        }
         super.onCreate(savedInstanceState)
 
         initActionBar()

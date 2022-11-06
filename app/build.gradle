@@ -34,7 +34,6 @@ android {
     buildFeatures {
         viewBinding true
     }
-    namespace 'com.example.mydictionary'
 }
 
 dependencies {
